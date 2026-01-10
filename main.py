@@ -49,12 +49,17 @@ class FieldElement:
         return self.__class__(self.order, (self.num ** power) % self.order)
 
     def __matmul__(self, value: int) -> List[FieldElement]:
+        # experimental
         values = []
         for i in range(self.num):
             elem = self.__class__  (self.order, i)
             product = elem * self.__class__(self.order, value)
             values.append(product)
         return values
+
+    def __truediv__(self, other: FieldElement):
+        num = self.num * pow(other.num, self.order - 2, self.order) % self.order
+        return FieldElement(self.order, num)
 
 
 f44 = FieldElement(57, 44)
@@ -73,5 +78,7 @@ print(f"Exponent of Element 46 with 2 is: {f46 ** 2}")
 # Check:
 print(f"CHECK: 46^2 and 46 * 46 are equivalent: {f46 * f46 == f46 ** 2}\n")
 
-f_small = FieldElement(57, 22)
-print(f"Result of Mat mul operation by {3} is: {f_small @ 3}")
+# f_small = FieldElement(57, 22)
+# print(f"Result of Mat mul operation by {3} is: {f_small @ 3}")
+
+print(FieldElement(19, 13)/FieldElement(19, 5))
