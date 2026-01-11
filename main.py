@@ -46,13 +46,15 @@ class FieldElement:
         return self.__class__(self.order, (self.num * other.num) % self.order)
 
     def __pow__(self, power: int) -> FieldElement:
-        return self.__class__(self.order, (self.num ** power) % self.order)
+        n = power % (self.order - 1)
+        num = pow(self.num, n, self.order)
+        return self.__class__(self.order, num)
 
     def __matmul__(self, value: int) -> List[FieldElement]:
         # experimental
         values = []
         for i in range(self.num):
-            elem = self.__class__  (self.order, i)
+            elem = self.__class__(self.order, i)
             product = elem * self.__class__(self.order, value)
             values.append(product)
         return values
@@ -81,4 +83,8 @@ print(f"CHECK: 46^2 and 46 * 46 are equivalent: {f46 * f46 == f46 ** 2}\n")
 # f_small = FieldElement(57, 22)
 # print(f"Result of Mat mul operation by {3} is: {f_small @ 3}")
 
-print(FieldElement(19, 13)/FieldElement(19, 5))
+print(FieldElement(13, 7) / FieldElement(8, 5))
+
+a = FieldElement(13, 7)
+b = FieldElement(13, 8)
+print(f"{a}^-3 == {b}: {a ** -3 == b} [Actual: {a ** -3}]")
