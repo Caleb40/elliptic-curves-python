@@ -64,6 +64,31 @@ class FieldElement:
         return FieldElement(self.order, num)
 
 
+class Point:
+    def __init__(self, x, y, a, b):
+        self.x = x
+        self.y = y
+        self.a = a
+        self.b = b
+
+        if self.y ** 2 != self.x ** 3 + a * x + self.b:
+            raise ValueError(f"({x}, {y}) is not on the curve")
+
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y \
+            and self.a == other.a and self.b == other.b
+
+    def __ne__(self, other):
+        return self.x != other.x or self.y != other.y \
+            or self.a != other.a or self.b != other.b
+
+    def __repr__(self):
+        if self.x is None:
+            return 'Point(infinity)'
+        else:
+            return 'Point({},{})_{}_{}'.format(self.x, self.y, self.a, self.b)
+
+
 def field_element_tests():
     f44 = FieldElement(57, 44)
     f33 = FieldElement(57, 33)
@@ -91,5 +116,13 @@ def field_element_tests():
     print(f"{a}^-3 == {b}: {a ** -3 == b} [Actual: {a ** -3}]")
 
 
+def point_tests():
+    p1 = Point(-1, -1, 5, 7)
+    print(f"{p1} is on the curve")
+    p2 = Point(-1, -2, 5, 7)
+    print(f"{p2} is on the curve")
+
+
 if __name__ == "__main__":
-    field_element_tests()
+    # field_element_tests()
+    point_tests()
