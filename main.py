@@ -64,27 +64,32 @@ class FieldElement:
         return FieldElement(self.order, num)
 
 
-f44 = FieldElement(57, 44)
-f33 = FieldElement(57, 33)
-res = f44 + f33
-print(f"Field element 44 added to field element 33 is:", res)
-print(f"Negated value of field element 44 is {-res}\n")
+def field_element_tests():
+    f44 = FieldElement(57, 44)
+    f33 = FieldElement(57, 33)
+    res = f44 + f33
+    print(f"Field element 44 added to field element 33 is:", res)
+    print(f"Negated value of field element 44 is {-res}\n")
 
-print(f"Field Element 44 - 33 is: {f44 - f33}")
-print(f"Field Element 33 - 44 is: {f33 - f44}")
-f46 = FieldElement(57, 46)
-print(f"Field Element 46 + 44 is: {f46 + f44}\n")
+    print(f"Field Element 44 - 33 is: {f44 - f33}")
+    print(f"Field Element 33 - 44 is: {f33 - f44}")
+    f46 = FieldElement(57, 46)
+    print(f"Field Element 46 + 44 is: {f46 + f44}\n")
 
-print(f"Product of Element 46 with itself is: {f46 * f46}")
-print(f"Exponent of Element 46 with 2 is: {f46 ** 2}")
-# Check:
-print(f"CHECK: 46^2 and 46 * 46 are equivalent: {f46 * f46 == f46 ** 2}\n")
+    print(f"Product of Element 46 with itself is: {f46 * f46}")
+    print(f"Exponent of Element 46 with 2 is: {f46 ** 2}")
+    # Check:
+    print(f"CHECK: 46^2 and 46 * 46 are equivalent: {f46 * f46 == f46 ** 2}\n")
 
-# f_small = FieldElement(57, 22)
-# print(f"Result of Mat mul operation by {3} is: {f_small @ 3}")
+    # f_small = FieldElement(57, 22)
+    # print(f"Result of Mat mul operation by {3} is: {f_small @ 3}")
 
-print(FieldElement(13, 7) / FieldElement(8, 5))
+    print(FieldElement(13, 7) / FieldElement(8, 5))
 
-a = FieldElement(13, 7)
-b = FieldElement(13, 8)
-print(f"{a}^-3 == {b}: {a ** -3 == b} [Actual: {a ** -3}]")
+    a = FieldElement(13, 7)
+    b = FieldElement(13, 8)
+    print(f"{a}^-3 == {b}: {a ** -3 == b} [Actual: {a ** -3}]")
+
+
+if __name__ == "__main__":
+    field_element_tests()
